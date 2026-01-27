@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Happy Birthday Vaishvi 💖</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', system-ui, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: radial-gradient(circle at top, #ffb6c1, #ff7aa2 45%, #b5179e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            overflow: hidden;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(12px);
+            border-radius: 22px;
+            padding: 2.6rem 2.4rem;
+            max-width: 460px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.35);
+            animation: float 4s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        /* Bigger photo circle */
+        .photo {
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 6px solid rgba(255, 255, 255, 0.85);
+            margin: 0 auto 1.1rem;
+            box-shadow: 0 16px 35px rgba(0, 0, 0, 0.4);
+            transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+        }
+
+        #caption {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: 0.8rem;
+        }
+
+        h1 {
+            font-size: 2.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        h2 {
+            font-size: 1.1rem;
+            font-weight: 400;
+            margin-bottom: 1.2rem;
+            opacity: 0.95;
+        }
+
+        p {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            margin-bottom: 1.6rem;
+        }
+
+        button {
+            border: none;
+            background: linear-gradient(135deg, #ff4d8d, #ff2f7a);
+            color: white;
+            padding: 0.75rem 1.7rem;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: 0.3s ease;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+        }
+
+        button:hover {
+            transform: scale(1.06);
+            filter: brightness(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #musicHint {
+            margin-top: 0.9rem;
+            font-size: 0.85rem;
+            animation: pulse 1.6s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+
+            50% {
+                transform: scale(1.08);
+                opacity: 1;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 0.6;
+            }
+        }
+
+        .hearts span {
+            position: absolute;
+            bottom: -20px;
+            font-size: 20px;
+            animation: rise 6s linear infinite;
+            opacity: 0.85;
+        }
+
+        @keyframes rise {
+            0% {
+                transform: translateY(0) scale(0.8);
+                opacity: 0;
+            }
+
+            10% {
+                opacity: 1;
+            }
+
+            100% {
+                transform: translateY(-110vh) scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .photo {
+                width: 180px;
+                height: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+        <img id="slideshow" class="photo" src="vaishu1.jpeg" alt="Vaishvi">
+        <p id="caption">Beautiful just the way you are 💖</p>
+
+        <h1>Happy Birthday 🎉</h1>
+        <h2>Vaishvi 💕</h2>
+
+        <p id="message">
+            Today is all about celebrating *you* ✨<br>
+            Your smile, your kindness, and the light you bring
+            into every room. You deserve all the love today
+            and always 💖
+        </p>
+
+        <button id="surpriseBtn">Click for Your Birthday Surprise 🎁</button>
+
+        <p id="surprise" class="hidden">
+            Vaishvi 💛<br><br>
+            Friendship like ours isn’t about talking every day —
+            it’s about knowing that no matter what changes,
+            some people always stay. You’ve been my constant,
+            my safe place, and the one who makes even ordinary
+            moments feel special ✨<br><br>
+
+            On your birthday, I just want you to know how grateful
+            I am to have you in my life. May this year bring you
+            endless smiles, success, and everything your heart
+            hopes for. Happy Birthday to someone who truly
+            deserves the best 💖🎂
+        </p>
+
+        <div id="musicHint">Tap anywhere to start the music 🎶💫</div>
+
+        <audio id="bgm" loop autoplay muted>
+            <source src="music1.mpeg" type="audio/mpeg">
+        </audio>
+    </div>
+
+    <div class="hearts"></div>
+
+    <script>
+        const bgm = document.getElementById('bgm');
+        const hearts = document.querySelector('.hearts');
+
+        document.addEventListener('click', () => {
+            if (bgm.paused) {
+                bgm.muted = false;
+                bgm.play().catch(() => { });
+            }
+            const hint = document.getElementById('musicHint');
+            if (hint) hint.style.display = 'none';
+        }, { once: true });
+
+        /* Slideshow with smooth fade + zoom */
+        const photos = [
+            { src: 'vaishu1.jpeg', caption: 'Beautiful just the way you are 💖' },
+            { src: 'vaishu2.jpeg', caption: 'A smile that lights up everything ✨' },
+            { src: 'vaishu3.jpeg', caption: 'Elegance in every frame 🌸' },
+            { src: 'vaishu4.jpeg', caption: 'Confidence looks perfect on you 💕' },
+            { src: 'vaishu5.jpeg', caption: 'Pure grace, inside and out ✨' },
+            { src: 'vaishu6.jpeg', caption: 'Radiating happiness and charm 💫' },
+            { src: 'vaishu7.jpeg', caption: 'Simply stunning, always 💖' },
+            { src: 'vaishu8.jpeg', caption: 'Born to shine ✨💗' }
+        ];
+
+        let index = 0;
+        const slideshow = document.getElementById('slideshow');
+        const caption = document.getElementById('caption');
+
+        setInterval(() => {
+            index = (index + 1) % photos.length;
+
+            slideshow.style.opacity = 0;
+            slideshow.style.transform = "scale(0.92)";
+
+            setTimeout(() => {
+                slideshow.src = photos[index].src;
+                caption.textContent = photos[index].caption;
+
+                slideshow.style.opacity = 1;
+                slideshow.style.transform = "scale(1)";
+            }, 500);
+        }, 3500);
+
+        document.getElementById('surpriseBtn').addEventListener('click', () => {
+            document.getElementById('message').classList.add('hidden');
+            document.getElementById('surpriseBtn').classList.add('hidden');
+            document.getElementById('surprise').classList.remove('hidden');
+        });
+
+        function createHeart() {
+            const heart = document.createElement('span');
+            heart.textContent = Math.random() > 0.5 ? '💖' : '💗';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = 4 + Math.random() * 3 + 's';
+            hearts.appendChild(heart);
+            setTimeout(() => heart.remove(), 7000);
+        }
+
+        setInterval(createHeart, 350);
+    </script>
+
+</body>
+
+</html>
